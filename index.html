@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kandy &amp; the Hill Country · A five-day group adventure</title>
+<meta name="description" content="Kandy & the Hill Country — a five-day group adventure through Sri Lanka's Cultural Triangle, 2–6 November 2026. Sigiriya, the Temple of the Tooth, hidden village temples and the coast." />
+
+<!-- Open Graph -->
+<meta property="og:title" content="Kandy & the Hill Country" />
+<meta property="og:description" content="A five-day group adventure · 2–6 November 2026" />
+<meta property="og:image" content="images/hero-sigiriya.jpg" />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<!-- Leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<!-- ============================ NAV ============================ -->
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a class="nav__brand" href="#top" aria-label="Kandy & the Hill Country — back to top">
+      <span class="lotus" aria-hidden="true">
+        <svg viewBox="0 0 48 48" width="22" height="22"><use href="#lotus-mark"/></svg>
+      </span>
+      <span class="nav__brandtext">Kandy <em>&amp;</em> the Hill Country</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#overview">Overview</a>
+      <a href="#stay">Stay</a>
+      <a href="#days">Days</a>
+      <a href="#sigiriya">Sigiriya</a>
+      <a href="#map">Map</a>
+      <a href="#know">Know before you go</a>
+    </nav>
+    <a href="#closing" class="nav__cta">Who's in?</a>
+    <button class="nav__menu" id="navMenu" aria-label="Jump to sections" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- "Trip at a glance" sticky summary -->
+<aside class="glance" id="glance" aria-label="Trip at a glance">
+  <button class="glance__toggle" id="glanceToggle" aria-expanded="true" aria-controls="glanceBody">
+    <svg viewBox="0 0 48 48" width="16" height="16" aria-hidden="true"><use href="#lotus-mark"/></svg>
+    <span>At a glance</span>
+  </button>
+  <div class="glance__body" id="glanceBody">
+    <dl>
+      <div><dt>Dates</dt><dd>2–6 Nov 2026</dd></div>
+      <div><dt>Base</dt><dd>Kandy, all five nights</dd></div>
+      <div><dt>Out</dt><dd>Negombo · late flight, Fri 6th</dd></div>
+    </dl>
+  </div>
+</aside>
+
+<main id="top">
+
+<!-- ============================ HERO ============================ -->
+<section class="hero" id="hero">
+  <div class="hero__media" data-parallax>
+    <img class="hero__img" src="images/hero-sigiriya.jpg" alt="Sigiriya Lion Rock rising above the jungle at the end of the water-garden causeway" />
+  </div>
+  <div class="hero__overlay"></div>
+  <div class="hero__content">
+    <p class="eyebrow eyebrow--light reveal">Sri Lanka · The Cultural Triangle</p>
+    <h1 class="hero__title reveal" data-delay="1">Kandy <span class="amp">&amp;</span> the<br/>Hill Country</h1>
+    <p class="hero__sub reveal" data-delay="2">A five-day group adventure · 2&ndash;6 November 2026</p>
+    <div class="hero__actions reveal" data-delay="3">
+      <a href="#overview" class="btn btn--gold">See the plan</a>
+      <a href="#closing" class="btn btn--ghost">So, who's in?</a>
+    </div>
+  </div>
+  <a href="#overview" class="hero__scroll" aria-label="Scroll to overview">
+    <span class="hero__scrolltext">Scroll</span>
+    <span class="hero__scrolldot"></span>
+  </a>
+</section>
+
+<!-- ============================ OVERVIEW ============================ -->
+<section class="overview section" id="overview">
+  <div class="wrap">
+    <div class="overview__head">
+      <p class="eyebrow reveal">The shape of it</p>
+      <h2 class="display reveal" data-delay="1">Five days, one base, no rushing.</h2>
+      <p class="lede reveal" data-delay="2">
+        We settle into <strong>Kandy</strong> for the whole trip and let the island come to us &mdash; the
+        Sacred Tooth at dusk, a dawn run at the Lion Rock, hidden 14th-century temples, and a slow
+        drive west to the coast to finish. One van, one driver, zero logistics headaches.
+      </p>
+      <p class="overview__note reveal" data-delay="2">
+        <span class="lotus-inline" aria-hidden="true"><svg viewBox="0 0 48 48" width="15" height="15"><use href="#lotus-mark"/></svg></span>
+        Tea plantations and elephants are deliberately left off &mdash; we're doing those elsewhere on the trip.
+      </p>
+    </div>
+
+    <ol class="timeline" aria-label="Five-day timeline">
+      <li class="timeline__item reveal" data-delay="1">
+        <a href="#day1">
+          <span class="timeline__day">Day 1</span>
+          <span class="timeline__date">Mon 2 Nov</span>
+          <span class="timeline__head">Arrival &amp; Kandy by night</span>
+        </a>
+      </li>
+      <li class="timeline__item reveal" data-delay="2">
+        <a href="#day2">
+          <span class="timeline__day">Day 2</span>
+          <span class="timeline__date">Tue 3 Nov</span>
+          <span class="timeline__head">Kandy's heritage heart</span>
+        </a>
+      </li>
+      <li class="timeline__item timeline__item--star reveal" data-delay="3">
+        <a href="#day3">
+          <span class="timeline__day">Day 3</span>
+          <span class="timeline__date">Wed 4 Nov</span>
+          <span class="timeline__head">Sigiriya day trip</span>
+          <span class="timeline__tag">The showpiece</span>
+        </a>
+      </li>
+      <li class="timeline__item reveal" data-delay="4">
+        <a href="#day4">
+          <span class="timeline__day">Day 4</span>
+          <span class="timeline__date">Thu 5 Nov</span>
+          <span class="timeline__head">Gardens &amp; hidden temples</span>
+        </a>
+      </li>
+      <li class="timeline__item reveal" data-delay="5">
+        <a href="#day5">
+          <span class="timeline__day">Day 5</span>
+          <span class="timeline__date">Fri 6 Nov</span>
+          <span class="timeline__head">Coast &amp; departure</span>
+        </a>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============================ GETTING THERE ============================ -->
+<section class="getting section" id="getting">
+  <div class="wrap getting__grid">
+    <figure class="getting__media reveal" data-img>
+      <img src="images/train.jpg" alt="Blue hill-country train crossing the Nine Arch Bridge through the tea hills" loading="lazy" />
+      <figcaption>The hill-country line near Ella</figcaption>
+    </figure>
+    <div class="getting__text">
+      <p class="eyebrow reveal">Getting there</p>
+      <h2 class="display reveal" data-delay="1">Down from Ella, into the hills.</h2>
+      <p class="lede reveal" data-delay="2">
+        We arrive from Ella on 2 November. The famous blue train through the tea country is one of the
+        great rail journeys on earth &mdash; if it's running, we'll ride it.
+      </p>
+      <div class="callout reveal" data-delay="2" role="note">
+        <p class="callout__label">⚠ Read first &mdash; the train</p>
+        <p>
+          The Ella&ndash;Kandy hill line was badly damaged by the <strong>late-2025 floods &amp; landslides</strong>
+          and was still suspended into early 2026, with full reopening targeted around mid-2026. Whether the
+          2 Nov service runs isn't certain yet.
+        </p>
+        <ul class="callout__list">
+          <li>Check <strong>railway.gov.lk</strong> about 4&ndash;6 weeks out.</li>
+          <li>Reserved seats open <strong>exactly 30 days before</strong> &mdash; and sell out fast.</li>
+          <li>Even running, the scenic ride is <strong>~7 hrs</strong>, so Day 1 is an arrival-evening either way.</li>
+        </ul>
+        <p>
+          Best move for a group: a private <strong>van &amp; driver (~5&ndash;6 hrs)</strong> for the whole stay.
+          It absorbs the train risk and makes the Sigiriya day trip and the Negombo transfer painless.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ WHERE WE STAY ============================ -->
+<section class="stay section" id="stay">
+  <div class="wrap">
+    <div class="stay__head">
+      <p class="eyebrow reveal">Where we stay</p>
+      <h2 class="display reveal" data-delay="1">All five nights, one base in Kandy.</h2>
+      <p class="lede reveal" data-delay="2">
+        Everything's a short hop from the lake, so the only real trade-off is
+        <strong>central &amp; lively</strong> versus <strong>quiet &amp; green</strong> &mdash; and how much we
+        want to spend. Here's a shortlist, all under a ten-minute drive of the centre.
+      </p>
+      <p class="stay__budget reveal" data-delay="2" id="stayBudget"></p>
+    </div>
+
+    <div class="stay__layout">
+      <div class="stay__mapwrap reveal" data-delay="2">
+        <div id="staymap" role="application" aria-label="Map of accommodation options around Kandy"></div>
+        <ul class="maplegend maplegend--stay">
+          <li><span class="dot dot--central"></span>Central · by the lake</li>
+          <li><span class="dot dot--quiet"></span>Quieter · the hillsides</li>
+          <li><span class="dot dot--landmark"></span>Temple &amp; town</li>
+        </ul>
+      </div>
+      <div class="stay__cards" id="stayCards">
+        <!-- cards rendered from js/stays.js -->
+        <p class="stay__fallback">Accommodation options load here. See <code>js/stays.js</code> for the full list.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ DAYS ============================ -->
+<section class="days" id="days">
+
+  <!-- DAY 1 -->
+  <article class="day section" id="day1">
+    <div class="wrap day__grid">
+      <figure class="day__media reveal" data-img>
+        <img src="images/kandy.jpg" alt="Kandy city wrapped around its lake, ringed by hill-country mountains" loading="lazy" />
+      </figure>
+      <div class="day__body">
+        <p class="day__marker reveal"><span class="day__num">01</span><span class="day__date">Mon 2 Nov</span></p>
+        <h2 class="display reveal" data-delay="1">Arrival &amp; Kandy by night</h2>
+        <p class="day__tag reveal" data-delay="1">An easy first evening after the journey.</p>
+        <div class="day__schedule" data-day="1">
+          <ul class="day__list reveal" data-delay="2">
+            <li><strong>Bahirawakanda Buddha</strong> &mdash; hilltop sunset views over the city</li>
+            <li><strong>Kandyan cultural dance</strong> &mdash; drumming, costumes, a fire-walking finale</li>
+            <li><strong>Temple of the Sacred Tooth Relic</strong> &mdash; the atmospheric evening ceremony</li>
+            <li>Lakeside stroll, then a welcome group dinner</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- DAY 2 -->
+  <article class="day day--alt section" id="day2">
+    <div class="wrap day__grid">
+      <figure class="day__media reveal" data-img>
+        <img src="images/temple-tooth.jpg" alt="The Temple of the Sacred Tooth Relic flanked by rows of Buddhist prayer flags" loading="lazy" />
+      </figure>
+      <div class="day__body">
+        <p class="day__marker reveal"><span class="day__num">02</span><span class="day__date">Tue 3 Nov</span></p>
+        <h2 class="display reveal" data-delay="1">Kandy's heritage heart</h2>
+        <p class="day__tag reveal" data-delay="1">The city's culture, unhurried.</p>
+        <div class="day__schedule" data-day="2">
+          <ul class="day__list reveal" data-delay="2">
+            <li><strong>Temple of the Tooth</strong> at the morning offering ceremony, plus its museum</li>
+            <li><strong>Old Kandy on foot</strong> &mdash; National Museum, the art &amp; culture centre, the market</li>
+            <li><strong>Udawatta Kele</strong> &mdash; rainforest reserve right behind the temple</li>
+            <li>A relaxed evening before the early Sigiriya start</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- DAY 3 -->
+  <article class="day section" id="day3">
+    <div class="wrap day__grid">
+      <figure class="day__media reveal" data-img>
+        <img src="images/dambulla.jpg" alt="The white Dambulla cave temple tucked beneath its vast granite overhang" loading="lazy" />
+      </figure>
+      <div class="day__body">
+        <p class="day__marker reveal"><span class="day__num">03</span><span class="day__date">Wed 4 Nov</span></p>
+        <h2 class="display reveal" data-delay="1">Sigiriya day trip<span class="day__star" title="The showpiece">★</span></h2>
+        <p class="day__tag reveal" data-delay="1">A dawn start north to the Lion Rock; Dambulla's caves on the way home.</p>
+        <div class="day__schedule" data-day="3">
+          <ul class="day__list reveal" data-delay="2">
+            <li><strong>Sigiriya Lion Rock</strong> (UNESCO) &mdash; frescoes, mirror wall, the lion's paws, the summit palace</li>
+            <li><strong>Dambulla Cave Temple</strong> &mdash; five caves of Buddha statues &amp; ceiling murals</li>
+            <li>The early start is essential &mdash; climb in the cool, beat the crowds and the haze</li>
+          </ul>
+        </div>
+        <a href="#sigiriya" class="textlink reveal" data-delay="2">Why this is the centrepiece &darr;</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- ============================ SIGIRIYA FEATURE (sits right after Day 3) ============================ -->
+  <section class="feature" id="sigiriya">
+    <div class="feature__media" data-parallax>
+      <img class="feature__img" src="images/sigiriya-aerial.jpg" alt="Aerial view across the summit ruins of Sigiriya, the fifth-century sky fortress" loading="lazy" />
+    </div>
+    <div class="feature__overlay"></div>
+    <div class="wrap feature__content">
+      <p class="eyebrow eyebrow--light reveal">The showpiece · Day 3</p>
+      <h2 class="feature__title reveal" data-delay="1">A palace in the sky,<br/>fifteen centuries old.</h2>
+      <p class="feature__lede reveal" data-delay="2">
+        A king built his fortress on top of a 200-metre granite plug, painted the cliffs with frescoes
+        and laid water gardens at its feet. We climb it at dawn &mdash; in the cool, ahead of the crowds.
+      </p>
+
+      <dl class="stats" id="stats">
+        <div class="stat reveal" data-delay="1">
+          <dd class="stat__num" data-count="1200" data-suffix="" data-prefix="~">0</dd>
+          <dt class="stat__label">steps to the summit</dt>
+        </div>
+        <div class="stat reveal" data-delay="2">
+          <dd class="stat__num" data-count="200" data-suffix=" m">0</dd>
+          <dt class="stat__label">of sheer granite</dt>
+        </div>
+        <div class="stat reveal" data-delay="3">
+          <dd class="stat__num" data-count="5" data-suffix="th">0</dd>
+          <dt class="stat__label">century sky-fortress</dt>
+        </div>
+        <div class="stat reveal" data-delay="4">
+          <dd class="stat__num" data-count="90" data-suffix=" km" data-prefix="~">0</dd>
+          <dt class="stat__label">north of Kandy · 2.5&ndash;3 hrs</dt>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- DAY 4 -->
+  <article class="day day--alt section" id="day4">
+    <div class="wrap day__grid">
+      <figure class="day__media reveal" data-img>
+        <img src="images/botanic-gardens.jpg" alt="Sweeping flower beds and palm avenues at the Royal Botanic Gardens, Peradeniya" loading="lazy" />
+      </figure>
+      <div class="day__body">
+        <p class="day__marker reveal"><span class="day__num">04</span><span class="day__date">Thu 5 Nov</span></p>
+        <h2 class="display reveal" data-delay="1">Gardens &amp; hidden temples</h2>
+        <p class="day__tag reveal" data-delay="1">Our bonus day, kept gentle after Sigiriya.</p>
+        <div class="day__schedule" data-day="4">
+          <ul class="day__list reveal" data-delay="2">
+            <li><strong>Royal Botanic Gardens, Peradeniya</strong> &mdash; the palm avenue, orchid house, giant fig</li>
+            <li><strong>Three 14th-century village temples</strong> &mdash; Gadaladeniya, Lankatilaka &amp; Embekka's superb wood carvings</li>
+            <li>Rice paddies, rural views, few crowds &mdash; then a final celebratory dinner in Kandy</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- DAY 5 -->
+  <article class="day section" id="day5">
+    <div class="wrap day__grid">
+      <figure class="day__media reveal" data-img>
+        <img src="images/negombo.jpg" alt="A palm-fringed Negombo beach with golden sand and the Sri Lankan flag" loading="lazy" />
+      </figure>
+      <div class="day__body">
+        <p class="day__marker reveal"><span class="day__num">05</span><span class="day__date">Fri 6 Nov</span></p>
+        <h2 class="display reveal" data-delay="1">Coast &amp; departure</h2>
+        <p class="day__tag reveal" data-delay="1">A late flight means no rush.</p>
+        <div class="day__schedule" data-day="5">
+          <ul class="day__list reveal" data-delay="2">
+            <li>A slow morning and a last wander in Kandy</li>
+            <li>The scenic drive west (~4&ndash;4.5 hrs)</li>
+            <li><strong>Negombo</strong> &mdash; the beach, the Dutch canal, the fish market</li>
+            <li>An early seafood dinner, then the short hop to the airport</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ============================ MAP ============================ -->
+<section class="mapsec section" id="map">
+  <div class="wrap">
+    <div class="mapsec__head">
+      <p class="eyebrow reveal">Where it all happens</p>
+      <h2 class="display reveal" data-delay="1">Kandy at the centre of it all.</h2>
+      <p class="lede reveal" data-delay="2">
+        Everything radiates out from our base. Day 3 runs north to Sigiriya and Dambulla; Day 4
+        loops the village temples just south-west; Day 5 follows the road out to the coast.
+      </p>
+    </div>
+    <div class="mapsec__frame reveal" data-delay="2">
+      <div id="leafmap" role="application" aria-label="Interactive map of the trip route across Sri Lanka"></div>
+      <ul class="maplegend">
+        <li><span class="dot dot--base"></span>Base &mdash; Kandy</li>
+        <li><span class="dot dot--north"></span>Day 3 &mdash; Sigiriya &amp; Dambulla</li>
+        <li><span class="dot dot--loop"></span>Day 4 &mdash; temple loop</li>
+        <li><span class="dot dot--coast"></span>Day 5 &mdash; Negombo</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ GOOD TO KNOW ============================ -->
+<section class="know section" id="know">
+  <div class="wrap">
+    <div class="know__head">
+      <p class="eyebrow reveal">Good to know</p>
+      <h2 class="display reveal" data-delay="1">A few small things that make it smooth.</h2>
+    </div>
+    <div class="cards">
+      <div class="card reveal" data-delay="1">
+        <span class="card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M3 17V8a2 2 0 0 1 2-2h11l3 4h0a2 2 0 0 1 2 2v5"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>
+        </span>
+        <h3>One van, one driver</h3>
+        <p>Hired for the whole stay &mdash; it makes Sigiriya and the temple loops effortless, and there's no daily haggling.</p>
+      </div>
+      <div class="card reveal" data-delay="2">
+        <span class="card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg>
+        </span>
+        <h3>Early starts pay off</h3>
+        <p>Especially Sigiriya. We climb in the cool of the morning, well ahead of the crowds and the midday haze.</p>
+      </div>
+      <div class="card reveal" data-delay="3">
+        <span class="card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M6 21V8l6-5 6 5v13"/><path d="M9 21v-6h6v6"/><path d="M3 21h18"/></svg>
+        </span>
+        <h3>Temple dress code</h3>
+        <p>Shoulders &amp; knees covered, shoes off. No shorts at Dambulla &mdash; slip-ons make the in-and-out easy.</p>
+      </div>
+      <div class="card reveal" data-delay="4">
+        <span class="card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 9v6M18 9v6"/></svg>
+        </span>
+        <h3>Carry cash</h3>
+        <p>Several sites are cash-only and fees are small &mdash; Sigiriya is the exception at roughly US$30 a head.</p>
+      </div>
+      <div class="card reveal" data-delay="5">
+        <span class="card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M5 8H2M22 8h-3M12 21v-3"/><path d="M7 19c1.5-2 3-3 5-3s3.5 1 5 3"/></svg>
+        </span>
+        <h3>Sun &amp; water</h3>
+        <p>Hat, sunscreen, plenty of water. The climbs are exposed and warm &mdash; the heat sneaks up on you.</p>
+      </div>
+      <div class="card reveal" data-delay="6">
+        <span class="card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4 14a5 5 0 0 1 5-5 6 6 0 0 1 11 2 4 4 0 0 1-2 7H8a4 4 0 0 1-4-4z"/><path d="M8 20l-1 2M12 20l-1 2M16 20l-1 2"/></svg>
+        </span>
+        <h3>November weather</h3>
+        <p>Warm days with afternoon showers, so outdoor plans go in the mornings &mdash; which suits the early starts anyway.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CLOSING ============================ -->
+<section class="closing" id="closing">
+  <div class="closing__media" data-parallax>
+    <img class="closing__img" src="images/sunset-closing.jpg" alt="" loading="lazy" />
+  </div>
+  <div class="closing__overlay"></div>
+  <div class="wrap closing__content">
+    <span class="lotus lotus--big reveal" aria-hidden="true">
+      <svg viewBox="0 0 48 48" width="44" height="44"><use href="#lotus-mark"/></svg>
+    </span>
+    <h2 class="closing__title reveal" data-delay="1">So &mdash; who's in?</h2>
+    <p class="closing__lede reveal" data-delay="2">
+      Next step is the easy part: lock in the dates, sort the van, and settle on where we stay.
+      Five days, one base, an island that does the rest.
+    </p>
+    <div class="closing__actions reveal" data-delay="3">
+      <a href="mailto:?subject=Kandy%20%26%20the%20Hill%20Country%20%E2%80%94%20I'm%20in&amp;body=Count%20me%20in%20for%202%E2%80%936%20November%202026." class="btn btn--gold btn--lg">I'm in &mdash; count me</a>
+      <a href="#overview" class="btn btn--ghost btn--lg">Run me through it again</a>
+    </div>
+    <p class="closing__dates reveal" data-delay="3">2&ndash;6 November 2026 · based in Kandy · out via Negombo</p>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap foot__inner">
+    <span class="lotus" aria-hidden="true"><svg viewBox="0 0 48 48" width="18" height="18"><use href="#lotus-mark"/></svg></span>
+    <p>Kandy &amp; the Hill Country · Sri Lanka's Cultural Triangle · November 2026</p>
+  </div>
+</footer>
+
+</main>
+
+<!-- Shared lotus motif (defined once, referenced everywhere) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="lotus-mark" viewBox="0 0 48 48">
+    <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M24 7c3.2 4.4 4.8 9.2 4.8 14.4 0 3.2-1.6 6-4.8 8-3.2-2-4.8-4.8-4.8-8C19.2 16.2 20.8 11.4 24 7z"/>
+      <path d="M24 29.4c-3.4-1.2-6-3.6-7.6-7.2-1-2.2-1.4-4.6-1.2-7.2 3.2 1 5.8 2.8 7.6 5.4 1.4 2 2.2 4.4 2.4 7"/>
+      <path d="M24 29.4c3.4-1.2 6-3.6 7.6-7.2 1-2.2 1.4-4.6 1.2-7.2-3.2 1-5.8 2.8-7.6 5.4-1.4 2-2.2 4.4-2.4 7"/>
+      <path d="M24 30.5c-4-2.2-8.2-2.8-12.6-1.8 1.8 3.8 4.8 6.2 9 7.2 2.6.6 5.2.6 7.8 0"/>
+      <path d="M24 30.5c4-2.2 8.2-2.8 12.6-1.8-1.8 3.8-4.8 6.2-9 7.2-2.6.6-5.2.6-7.8 0"/>
+      <path d="M14 37.5c3 1.6 6.4 2.4 10 2.4s7-.8 10-2.4"/>
+    </g>
+  </symbol>
+</svg>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="js/itinerary.js"></script>
+<script src="js/stays.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
