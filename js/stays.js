@@ -27,28 +27,6 @@ window.STAYS = {
 
   options: [
     {
-      id: 'kingsresidence', name: "Hidden Relaxation at King's Residence", host: 'Booking.com',
-      url: 'https://www.booking.com/hotel/lk/hidden-relaxation-at-kings-residence.html?checkin=2026-11-02&checkout=2026-11-06&group_adults=6&no_rooms=1&group_children=0',
-      kind: 'central', tier: '££', within: true, coords: [7.2912, 80.6435],
-      nightly: 130, centre: { walk: '12 min', drive: '4 min' },
-      type: 'Whole 3-bed apartment', capacity: 'Sleeps 6 · 3 bed / 4 bath',
-      price: '~£420–600 for the group', perPerson: '≈ £70–100pp', priceNote: 'a whole flat, by the temple',
-      lean: 'By the temple',
-      pros: ['A whole 3-bed apartment — kitchen, living room, private entrance', 'Five-minute walk to the Temple of the Tooth', 'Balcony with mountain views'],
-      cons: ['Up on the 4th floor of a residence', 'No pool or garden']
-    },
-    {
-      id: 'kuwera', name: 'Kuwera Kandy', host: 'Booking.com',
-      url: 'https://www.booking.com/hotel/lk/kuwera-kandy-kandy.html?checkin=2026-11-02&checkout=2026-11-06&group_adults=6&no_rooms=3&group_children=0',
-      kind: 'central', tier: '££', within: true, coords: [7.2858, 80.6415],
-      nightly: 150, centre: { walk: '18 min', drive: '6 min' },
-      type: 'Boutique hotel · pool & hill views', capacity: '6 in ≈3 rooms · 4 nights',
-      price: '~£500–720 for the group', perPerson: '≈ £85–120pp', priceNote: 'pool + big views (7.9★)',
-      lean: 'Hilltop pool',
-      pros: ['Swimming pool and a sunny mountain-view terrace', 'Well-reviewed boutique, good value', 'Quiet hilltop perch above the city'],
-      cons: ['Up a steep hill — tuk-tuk up and down', 'Rooms, not a whole place']
-    },
-    {
       id: 'vishwa', name: 'Vishwa Retreat', host: 'Booking.com',
       url: 'https://www.booking.com/hotel/lk/vishwa-retreat.html?checkin=2026-11-02&checkout=2026-11-06&group_adults=6&no_rooms=3&group_children=0',
       kind: 'central', tier: '££', within: true, coords: [7.2872, 80.6460],
@@ -71,17 +49,6 @@ window.STAYS = {
       cons: ['Separate rooms, not a whole place', 'Books up fast for November']
     },
     {
-      id: 'candyvilla', name: 'Villa Kandy', host: 'Booking.com',
-      url: 'https://www.booking.com/hotel/lk/villa-kandy-kandy1.html?checkin=2026-11-02&checkout=2026-11-06&group_adults=6&no_rooms=1&group_children=0',
-      kind: 'central', tier: '££', within: true, coords: [7.3006167, 80.6322308],
-      nightly: 128, centre: { walk: '14 min', drive: '3 min' },
-      type: 'Whole 3-bed villa · private pool', capacity: 'Sleeps 6 · 3 bed / 3 bath',
-      price: '~£420–600 for the group', perPerson: '≈ £70–100pp', priceNote: 'the whole villa, just us',
-      drive: '~5 min to town', lean: 'Best balance',
-      pros: ['A whole villa to ourselves — pool, hot tub, kitchen', 'Central but tucked off the main drag', 'Most space and privacy for the price'],
-      cons: ['Not right on the lake', 'Popular — books up early for Nov']
-    },
-    {
       id: 'thilanka', name: 'Thilanka Hotel', host: 'Booking.com',
       url: 'https://www.booking.com/hotel/lk/thilanka.html?checkin=2026-11-02&checkout=2026-11-06&group_adults=6&no_rooms=3&group_children=0',
       kind: 'central', tier: '££', within: true, coords: [7.29264, 80.64979],
@@ -102,17 +69,6 @@ window.STAYS = {
       drive: '~10 min up the hill', lean: 'The view',
       pros: ['Stunning infinity pool over the valley', 'Quiet, design-led, properly 5-star', 'The wow-factor option'],
       cons: ['Well above the £500–900 target', 'Up in the Hantana hills, not walkable']
-    },
-    {
-      id: 'elephant', name: 'Elephant Stables', host: 'Booking.com',
-      url: 'https://www.booking.com/hotel/lk/the-elephant-stables.html?checkin=2026-11-02&checkout=2026-11-06&group_adults=6&no_rooms=3&group_children=0',
-      kind: 'quieter', tier: '£££', within: false, coords: [7.2957825, 80.6410471],
-      nightly: 850, centre: { walk: '11 min', drive: '3 min' },
-      type: 'Colonial boutique villa · exclusive-use', capacity: 'Whole house (≈6 rooms)',
-      price: '~£3,400 for the group', perPerson: '≈ £565pp', priceNote: 'the big splurge — ~£850/night',
-      drive: '~5 min to town', lean: 'Character',
-      pros: ['A gorgeous restored colonial mansion', 'Central yet leafy and private', 'Can take the whole house for the group'],
-      cons: ['Premium — well over budget', 'Boutique, so books out early']
     }
   ]
 };

@@ -133,8 +133,8 @@
     sel.innerHTML = priced.map(function (o, i) {
       return '<option value="' + i + '">' + o.name + ' · £' + o.nightly + '/night</option>';
     }).join('');
-    // default to a sensible in-budget pick (Villa Kandy if present)
-    var def = priced.findIndex(function (o) { return o.id === 'candyvilla'; });
+    // default to a sensible in-budget pick (Lakewood if present)
+    var def = priced.findIndex(function (o) { return o.id === 'lakewood'; });
     sel.selectedIndex = def >= 0 ? def : 0;
 
     var nightsEl = document.getElementById('calcNights');
