@@ -27,15 +27,37 @@ window.STAYS = {
 
   options: [
     {
-      id: 'mcleod', name: 'McLeod Inn', host: 'Booking.com',
-      url: 'https://www.booking.com/hotel/lk/mcleod-inn.html?checkin=2026-11-02&checkout=2026-11-06&group_adults=6&no_rooms=3&group_children=0',
-      kind: 'central', tier: '£', within: true, coords: [7.2872461, 80.6427823],
-      nightly: 78, centre: { walk: '15 min', drive: '4 min' },
-      type: 'Budget homestay rooms', capacity: '6 in ≈3 rooms · 4 nights',
-      price: '~£260–360 for the group', perPerson: '≈ £45–60pp', priceNote: 'the cheapest of the lot',
-      drive: '~5 min · walkable', lean: 'Cheapest',
-      pros: ['Famous elevated city & lake views', 'Friendly, long-running homestay', 'Central — straight down to the lake'],
-      cons: ['Basic, no-frills rooms', 'A walk uphill back from town']
+      id: 'kingsresidence', name: "Hidden Relaxation at King's Residence", host: 'Booking.com',
+      url: 'https://www.booking.com/hotel/lk/hidden-relaxation-at-kings-residence.html?checkin=2026-11-02&checkout=2026-11-06&group_adults=6&no_rooms=1&group_children=0',
+      kind: 'central', tier: '££', within: true, coords: [7.2912, 80.6435],
+      nightly: 130, centre: { walk: '12 min', drive: '4 min' },
+      type: 'Whole 3-bed apartment', capacity: 'Sleeps 6 · 3 bed / 4 bath',
+      price: '~£420–600 for the group', perPerson: '≈ £70–100pp', priceNote: 'a whole flat, by the temple',
+      lean: 'By the temple',
+      pros: ['A whole 3-bed apartment — kitchen, living room, private entrance', 'Five-minute walk to the Temple of the Tooth', 'Balcony with mountain views'],
+      cons: ['Up on the 4th floor of a residence', 'No pool or garden']
+    },
+    {
+      id: 'kuwera', name: 'Kuwera Kandy', host: 'Booking.com',
+      url: 'https://www.booking.com/hotel/lk/kuwera-kandy-kandy.html?checkin=2026-11-02&checkout=2026-11-06&group_adults=6&no_rooms=3&group_children=0',
+      kind: 'central', tier: '££', within: true, coords: [7.2858, 80.6415],
+      nightly: 150, centre: { walk: '18 min', drive: '6 min' },
+      type: 'Boutique hotel · pool & hill views', capacity: '6 in ≈3 rooms · 4 nights',
+      price: '~£500–720 for the group', perPerson: '≈ £85–120pp', priceNote: 'pool + big views (7.9★)',
+      lean: 'Hilltop pool',
+      pros: ['Swimming pool and a sunny mountain-view terrace', 'Well-reviewed boutique, good value', 'Quiet hilltop perch above the city'],
+      cons: ['Up a steep hill — tuk-tuk up and down', 'Rooms, not a whole place']
+    },
+    {
+      id: 'vishwa', name: 'Vishwa Retreat', host: 'Booking.com',
+      url: 'https://www.booking.com/hotel/lk/vishwa-retreat.html?checkin=2026-11-02&checkout=2026-11-06&group_adults=6&no_rooms=3&group_children=0',
+      kind: 'central', tier: '££', within: true, coords: [7.2872, 80.6460],
+      nightly: 150, centre: { walk: '14 min', drive: '5 min' },
+      type: '4★ hotel · garden & terrace', capacity: '6 in ≈3 rooms · 4 nights',
+      price: '~£500–700 for the group', perPerson: '≈ £85–115pp', priceNote: 'newer, leafy 4-star',
+      lean: 'Garden calm',
+      pros: ['A leafy 4-star with garden, terrace and fireplace', 'Short walk to the lake and temple', 'Newer rooms and a good restaurant'],
+      cons: ['Newer listing — fewer reviews so far', 'Rooms, not a whole villa']
     },
     {
       id: 'lakewood', name: 'Lakewood Residence', host: 'Booking.com',
