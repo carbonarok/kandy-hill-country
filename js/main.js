@@ -115,6 +115,34 @@
   }
   renderStayCards();
 
+  /* ---------- Render restaurant cards (from js/eats.js) ---------- */
+  function renderEats() {
+    var data = window.EATS;
+    if (!data) return;
+    var noteEl = document.getElementById('eatNote');
+    if (noteEl && data.note) noteEl.textContent = data.note;
+    var wrap = document.getElementById('eatCards');
+    if (!wrap || !data.options) return;
+    var html = '';
+    data.options.forEach(function (o, i) {
+      html += '<article class="eatcard reveal' + (o.splurge ? ' eatcard--splurge' : '') +
+        '" data-delay="' + Math.min(i + 1, 6) + '">';
+      html += '<div class="eatcard__top">';
+      html += '<span class="eatcard__vibe eatvibe--' + o.kind + '">' + o.vibe + '</span>';
+      html += '<span class="eatcard__tier">' + o.tier + '</span>';
+      html += '</div>';
+      html += '<h3 class="eatcard__name">' + o.name + '</h3>';
+      html += '<p class="eatcard__meta">' + o.cuisine + ' · ' + o.area + '</p>';
+      html += '<p class="eatcard__why">' + o.why + '</p>';
+      html += '<p class="eatcard__meal"><span>Good for</span>' + o.meal + '</p>';
+      html += '<a class="eatcard__link" href="' + o.url.replace(/&/g, '&amp;') +
+        '" target="_blank" rel="noopener">On TripAdvisor &rarr;</a>';
+      html += '</article>';
+    });
+    wrap.innerHTML = html;
+  }
+  renderEats();
+
   /* ---------- Graceful image degradation ----------
      If a photo fails to load, mark its media container so CSS
      reveals a tasteful gradient block instead of a broken image. */
@@ -174,6 +202,7 @@
     ['day1', 'days'], ['day2', 'days'], ['day3', 'days'], ['day4', 'days'], ['day5', 'days'],
     ['sigiriya', 'sigiriya'],
     ['map', 'map'],
+    ['eat', 'eat'],
     ['know', 'know']
   ];
   var sectionToLink = {};

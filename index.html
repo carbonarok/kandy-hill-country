@@ -39,7 +39,8 @@
       <a href="#days">Days</a>
       <a href="#sigiriya">Sigiriya</a>
       <a href="#map">Map</a>
-      <a href="#know">Know before you go</a>
+      <a href="#eat">Eat</a>
+      <a href="#know">Know</a>
     </nav>
     <a href="#closing" class="nav__cta">Who's in?</a>
     <button class="nav__menu" id="navMenu" aria-label="Jump to sections" aria-expanded="false">
@@ -381,6 +382,21 @@
   </div>
 </section>
 
+<!-- ============================ WHERE WE EAT ============================ -->
+<section class="eat section" id="eat">
+  <div class="wrap">
+    <div class="eat__head">
+      <p class="eyebrow reveal">Where we eat</p>
+      <h2 class="display reveal" data-delay="1">Eating our way through Kandy.</h2>
+      <p class="lede reveal" data-delay="2" id="eatNote"></p>
+    </div>
+    <div class="eat__cards" id="eatCards">
+      <!-- cards rendered from js/eats.js -->
+      <p class="stay__fallback">Restaurant picks load here. See <code>js/eats.js</code> for the list.</p>
+    </div>
+  </div>
+</section>
+
 <!-- ============================ GOOD TO KNOW ============================ -->
 <section class="know section" id="know">
   <div class="wrap">
@@ -485,6 +501,7 @@
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="js/itinerary.js"></script>
 <script src="js/stays.js"></script>
+<script src="js/eats.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

@@ -529,6 +529,47 @@ dl{margin:0}
 .map-refdot{display:block;width:12px;height:12px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.2)}
 
 /* ============================================================
+   WHERE WE EAT
+   ============================================================ */
+.eat{background:var(--cream)}
+.eat__head{max-width:680px;margin-bottom:clamp(2rem,4vw,3rem)}
+.eat__cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.eatcard{
+  display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);
+  border-radius:15px;padding:1.4rem 1.4rem 1.5rem;box-shadow:var(--shadow-sm);
+  transition:transform .4s cubic-bezier(.2,.8,.25,1),box-shadow .4s,border-color .4s;
+}
+.eatcard:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:transparent}
+.eatcard--splurge{background:linear-gradient(180deg,#fff,#fbf4e6);border-color:rgba(232,163,61,.45)}
+.eatcard__top{display:flex;align-items:center;justify-content:space-between;margin-bottom:.8rem}
+.eatcard__vibe{
+  font-size:.66rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  padding:.26rem .6rem;border-radius:6px;color:#fff;
+}
+.eatvibe--rooftop{background:var(--gold)}
+.eatvibe--cafe{background:var(--jade)}
+.eatvibe--local{background:var(--terracotta)}
+.eatvibe--experience{background:#9a6510}
+.eatvibe--fine{background:var(--ink)}
+.eatvibe--coast{background:#2f7fae}
+.eatcard__tier{font-family:var(--serif);font-weight:600;color:var(--gold);font-size:1.05rem;letter-spacing:.03em}
+.eatcard__name{font-size:1.32rem;line-height:1.12;color:var(--ink)}
+.eatcard__meta{margin-top:.3rem;font-size:.82rem;color:var(--terracotta);font-weight:600;letter-spacing:.01em}
+.eatcard__why{margin-top:.7rem;font-size:.93rem;line-height:1.55;color:var(--body)}
+.eatcard__meal{
+  margin-top:.9rem;font-family:var(--serif);font-style:italic;font-size:1.02rem;color:var(--jade);
+}
+.eatcard__meal span{
+  display:block;font-family:var(--sans);font-style:normal;font-size:.64rem;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--body);opacity:.6;margin-bottom:.1rem;
+}
+.eatcard__link{
+  margin-top:1.2rem;align-self:flex-start;font-weight:600;font-size:.9rem;color:var(--terracotta);
+  border-bottom:1.5px solid transparent;transition:border-color .3s;
+}
+.eatcard__link:hover{border-bottom-color:var(--terracotta)}
+
+/* ============================================================
    GOOD TO KNOW
    ============================================================ */
 .know{background:var(--jade-deep);color:var(--cream);position:relative}
@@ -623,6 +664,7 @@ dl{margin:0}
   .stay__layout{grid-template-columns:1fr;gap:1.5rem}
   .stay__mapwrap{position:static;top:auto}
   #staymap{height:clamp(360px,52vh,460px)}
+  .eat__cards{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width:760px){
   :root{--nav-h:60px}
@@ -661,6 +703,7 @@ dl{margin:0}
   .glance{display:none}
   .hero{align-items:center;padding-top:var(--nav-h)}
   .stay__cards{grid-template-columns:1fr}
+  .eat__cards{grid-template-columns:1fr}
 }
 @media (max-width:480px){
   .timeline{grid-template-columns:1fr}
