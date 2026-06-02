@@ -115,6 +115,60 @@
   }
   renderStayCards();
 
+  /* ---------- Cost-per-person calculator ---------- */
+  function initCalc() {
+    var data = window.STAYS;
+    var sel = document.getElementById('calcStay');
+    if (!data || !data.options || !sel) return;
+    var priced = data.options.filter(function (o) { return typeof o.nightly === 'number'; });
+    if (!priced.length) return;
+
+    sel.innerHTML = priced.map(function (o, i) {
+      return '<option value="' + i + '">' + o.name + ' · £' + o.nightly + '/night</option>';
+    }).join('');
+    // default to a sensible in-budget pick (Villa Kandy if present)
+    var def = priced.findIndex(function (o) { return o.id === 'candyvilla'; });
+    sel.selectedIndex = def >= 0 ? def : 0;
+
+    var nightsEl = document.getElementById('calcNights');
+    var peopleEl = document.getElementById('calcPeople');
+    var ppEl = document.getElementById('calcPP');
+    var totalEl = document.getElementById('calcTotal');
+    var statusEl = document.getElementById('calcStatus');
+    var meterEl = document.getElementById('calcMeter');
+
+    function money(n) { return '£' + Math.round(n).toLocaleString('en-GB'); }
+    function clampField(el, lo, hi, fallback) {
+      var v = parseInt(el.value, 10);
+      if (isNaN(v)) v = fallback;
+      v = Math.max(lo, Math.min(hi, v));
+      return v;
+    }
+    function update() {
+      var o = priced[parseInt(sel.value, 10) || 0];
+      var nights = clampField(nightsEl, 1, 30, 4);
+      var people = clampField(peopleEl, 1, 30, 6);
+      var total = o.nightly * nights;
+      var pp = total / people;
+      ppEl.textContent = money(pp);
+      totalEl.textContent = money(total) + ' total';
+
+      var state, label;
+      if (total <= 900) { state = 'good'; label = 'Within the £500–900 group target'; }
+      else if (total <= 1300) { state = 'mid'; label = 'A stretch above the target'; }
+      else { state = 'over'; label = 'A proper splurge — well over target'; }
+      statusEl.textContent = label;
+      statusEl.className = 'calc__status is-' + state;
+      meterEl.style.width = Math.max(6, Math.min(100, (total / 1800) * 100)) + '%';
+      meterEl.className = 'calc__meterfill is-' + state;
+    }
+    sel.addEventListener('change', update);
+    nightsEl.addEventListener('input', update);
+    peopleEl.addEventListener('input', update);
+    update();
+  }
+  initCalc();
+
   /* ---------- Render restaurant cards (from js/eats.js) ---------- */
   function renderEats() {
     var data = window.EATS;
@@ -365,17 +419,32 @@
         .bindPopup('<b>' + p.name + '</b>' + p.note + '<span class="pop-tag">' + p.tag + '</span>');
     });
 
-    // Route hints: Kandy -> Sigiriya/Dambulla (north), Kandy -> temple loop, Kandy -> Negombo
+    // Routes: draw a straight dashed line immediately, then ask OSRM for the
+    // real road geometry + distance/time and swap it in. Falls back silently.
     var kandy = places[0].coords;
-    function route(to, color) {
-      L.polyline([kandy, to], {
-        color: color, weight: 3, opacity: .75, dashArray: '2 9', lineCap: 'round'
+    function route(to, color, label) {
+      var line = L.polyline([kandy, to], {
+        color: color, weight: 3, opacity: .5, dashArray: '2 9', lineCap: 'round'
       }).addTo(map);
+      var url = 'https://router.project-osrm.org/route/v1/driving/' +
+        kandy[1] + ',' + kandy[0] + ';' + to[1] + ',' + to[0] + '?overview=full&geometries=geojson';
+      fetch(url).then(function (r) { return r.json(); }).then(function (j) {
+        if (!j.routes || !j.routes.length) return;
+        var rt = j.routes[0];
+        var coords = rt.geometry.coordinates.map(function (c) { return [c[1], c[0]]; });
+        map.removeLayer(line);
+        var poly = L.polyline(coords, { color: color, weight: 4, opacity: .85, lineCap: 'round', lineJoin: 'round' }).addTo(map);
+        var km = Math.round(rt.distance / 1000);
+        var mins = Math.round(rt.duration / 60);
+        var hrs = Math.floor(mins / 60), rem = mins % 60;
+        var t = hrs ? (hrs + 'h' + (rem ? ' ' + rem + 'm' : '')) : (mins + ' min');
+        poly.bindPopup('<b>' + label + '</b>By road: ~' + km + ' km · ~' + t + ' drive');
+      }).catch(function () { /* keep the straight-line fallback */ });
     }
-    route(places[2].coords, COLORS.north);  // Dambulla
-    route(places[1].coords, COLORS.north);  // Sigiriya
-    route(places[4].coords, COLORS.loop);   // temple loop
-    route(places[5].coords, COLORS.coast);  // Negombo
+    route(places[2].coords, COLORS.north, 'Kandy → Dambulla');
+    route(places[1].coords, COLORS.north, 'Kandy → Sigiriya');
+    route(places[4].coords, COLORS.loop, 'Kandy → temple loop');
+    route(places[5].coords, COLORS.coast, 'Kandy → Negombo');
 
     map.fitBounds(bounds, { padding: [55, 55] });
 
@@ -434,5 +503,239 @@
       smap.on('click', function () { smap.scrollWheelZoom.enable(); });
       smap.on('mouseout', function () { smap.scrollWheelZoom.disable(); });
     }
+  })();
+
+  /* ---------- Lotus loader ---------- */
+  (function () {
+    var loader = document.getElementById('loader');
+    if (!loader) return;
+    function done() {
+      loader.classList.add('is-done');
+      setTimeout(function () { loader.style.display = 'none'; }, 650);
+    }
+    if (reduceMotion) { done(); return; }
+    var hidden = false;
+    function go() { if (!hidden) { hidden = true; done(); } }
+    window.addEventListener('load', function () { setTimeout(go, 350); });
+    setTimeout(go, 2600); // safety net if load is slow
+  })();
+
+  /* ---------- Countdown to the trip ---------- */
+  (function () {
+    var box = document.getElementById('countdown');
+    if (!box) return;
+    var target = Date.parse('2026-11-02T00:00:00+05:30'); // arrival, Sri Lanka time
+    var fields = {
+      days: box.querySelector('[data-cd="days"]'),
+      hours: box.querySelector('[data-cd="hours"]'),
+      mins: box.querySelector('[data-cd="mins"]'),
+      secs: box.querySelector('[data-cd="secs"]')
+    };
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+    function tick() {
+      var diff = target - Date.now();
+      if (diff <= 0) {
+        box.innerHTML = '<p class="countdown__cap countdown__cap--now">We’re in Sri Lanka — enjoy! 🌴</p>';
+        clearInterval(timer);
+        return;
+      }
+      var s = Math.floor(diff / 1000);
+      fields.days.textContent = Math.floor(s / 86400);
+      fields.hours.textContent = pad(Math.floor((s % 86400) / 3600));
+      fields.mins.textContent = pad(Math.floor((s % 3600) / 60));
+      fields.secs.textContent = pad(s % 60);
+    }
+    box.hidden = false;
+    tick();
+    var timer = setInterval(tick, 1000);
+  })();
+
+  /* ---------- Add to calendar (.ics) ---------- */
+  (function () {
+    var btn = document.getElementById('addCal');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var ics = [
+        'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Kandy Trip//EN', 'CALSCALE:GREGORIAN',
+        'BEGIN:VEVENT',
+        'UID:kandy-hill-country-2026@trip',
+        'DTSTART;VALUE=DATE:20261102',
+        'DTEND;VALUE=DATE:20261107',
+        'SUMMARY:Kandy & the Hill Country — Sri Lanka',
+        'LOCATION:Kandy, Sri Lanka',
+        'DESCRIPTION:Five-day group trip — Sigiriya, the Temple of the Tooth, hill-country temples and the coast. ' + location.href,
+        'URL:' + location.href,
+        'END:VEVENT', 'END:VCALENDAR'
+      ].join('\r\n');
+      var blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'kandy-hill-country.ics';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+    });
+  })();
+
+  /* ---------- Share (WhatsApp + copy link) ---------- */
+  (function () {
+    var wa = document.getElementById('shareWhatsApp');
+    var copy = document.getElementById('shareCopy');
+    var msg = 'Kandy & the Hill Country — a five-day group trip, 2–6 Nov 2026. Have a look:';
+    if (wa) wa.href = 'https://wa.me/?text=' + encodeURIComponent(msg + ' ' + location.href);
+    if (copy) {
+      copy.addEventListener('click', function () {
+        var label = document.getElementById('copyLabel');
+        function ok() { if (label) { var t = label.textContent; label.textContent = 'Copied!'; setTimeout(function () { label.textContent = t; }, 1600); } }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(location.href).then(ok, ok);
+        } else {
+          var ta = document.createElement('textarea'); ta.value = location.href; document.body.appendChild(ta);
+          ta.select(); try { document.execCommand('copy'); } catch (e) {} document.body.removeChild(ta); ok();
+        }
+      });
+    }
+  })();
+
+  /* ---------- Live Kandy weather (Open-Meteo, no key) ---------- */
+  (function () {
+    var tempEl = document.getElementById('wxTemp');
+    if (!tempEl) return;
+    var descEl = document.getElementById('wxDesc');
+    var iconEl = document.getElementById('wxIcon');
+    function wmo(code) {
+      if (code === 0) return ['☀️', 'clear & sunny'];
+      if (code <= 2) return ['🌤️', 'mostly sunny'];
+      if (code === 3) return ['☁️', 'cloudy'];
+      if (code <= 48) return ['🌫️', 'misty'];
+      if (code <= 67) return ['🌧️', 'rainy'];
+      if (code <= 77) return ['❄️', 'wintry'];
+      if (code <= 82) return ['🌦️', 'showers'];
+      if (code <= 99) return ['⛈️', 'thundery'];
+      return ['🌤️', 'fair'];
+    }
+    fetch('https://api.open-meteo.com/v1/forecast?latitude=7.2906&longitude=80.6337&current=temperature_2m,weather_code&timezone=auto')
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        var c = j && j.current;
+        if (!c) throw 0;
+        var w = wmo(c.weather_code);
+        tempEl.textContent = Math.round(c.temperature_2m) + '°';
+        if (descEl) descEl.textContent = w[1];
+        if (iconEl) iconEl.textContent = w[0];
+      })
+      .catch(function () {
+        tempEl.textContent = '~29°';
+        if (descEl) descEl.textContent = 'warm & humid';
+        if (iconEl) iconEl.textContent = '🌤️';
+      });
+  })();
+
+  /* ---------- GBP → LKR converter (open.er-api.com, no key) ---------- */
+  (function () {
+    var gbp = document.getElementById('fxGbp');
+    if (!gbp) return;
+    var lkr = document.getElementById('fxLkr');
+    var rateEl = document.getElementById('fxRate');
+    var rate = 390; // sensible fallback until the live rate lands
+    function fmt(n) { return Math.round(n).toLocaleString('en-GB'); }
+    function update() {
+      var v = parseFloat(gbp.value);
+      if (isNaN(v)) v = 0;
+      lkr.value = 'Rs ' + fmt(v * rate);
+    }
+    fetch('https://open.er-api.com/v6/latest/GBP')
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (j && j.rates && j.rates.LKR) {
+          rate = j.rates.LKR;
+          if (rateEl) rateEl.textContent = '£1 ≈ Rs ' + fmt(rate) + ' · live rate';
+        }
+        update();
+      })
+      .catch(function () { if (rateEl) rateEl.textContent = '£1 ≈ Rs ' + fmt(rate) + ' · approx'; });
+    gbp.addEventListener('input', update);
+    if (rateEl) rateEl.textContent = '£1 ≈ Rs ' + fmt(rate) + ' · approx';
+    update();
+  })();
+
+  /* ---------- Packing checklist (localStorage) ---------- */
+  (function () {
+    var listEl = document.getElementById('packList');
+    if (!listEl) return;
+    var KEY = 'kandy-pack-v1';
+    var items = [
+      'Passport + visa (ETA approved online)',
+      'Light, breathable clothes',
+      'A cover-up for temples (shoulders & knees)',
+      'Slip-on shoes — shoes come off at temples',
+      'Sun hat & high-SPF sunscreen',
+      'Refillable water bottle',
+      'Cash — Sri Lankan rupees for the small sites',
+      'A light rain layer for afternoon showers',
+      'Travel adapter (type D / G / M)',
+      'Insect repellent',
+      'Daypack for the Sigiriya climb',
+      'Camera / phone + charger'
+    ];
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { state = {}; }
+    function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+    listEl.innerHTML = items.map(function (txt, i) {
+      var on = state[txt] ? ' checked' : '';
+      return '<li><label class="pack' + (state[txt] ? ' is-done' : '') + '">' +
+        '<input type="checkbox" data-i="' + i + '"' + on + '>' +
+        '<span class="pack__box" aria-hidden="true"></span><span class="pack__txt">' + txt + '</span></label></li>';
+    }).join('');
+    listEl.addEventListener('change', function (e) {
+      var cb = e.target;
+      if (!cb || cb.type !== 'checkbox') return;
+      var txt = items[+cb.getAttribute('data-i')];
+      state[txt] = cb.checked;
+      cb.closest('.pack').classList.toggle('is-done', cb.checked);
+      save();
+    });
+    var reset = document.getElementById('packReset');
+    if (reset) reset.addEventListener('click', function () {
+      state = {}; save();
+      listEl.querySelectorAll('input[type="checkbox"]').forEach(function (cb) { cb.checked = false; });
+      listEl.querySelectorAll('.pack').forEach(function (l) { l.classList.remove('is-done'); });
+    });
+  })();
+
+  /* ---------- Photo lightbox ---------- */
+  (function () {
+    var lb = document.getElementById('lightbox');
+    if (!lb) return;
+    var imgEl = document.getElementById('lbImg');
+    var capEl = document.getElementById('lbCap');
+    var gallery = [];
+    Array.prototype.forEach.call(document.querySelectorAll('[data-img] img, .feature__img'), function (img) {
+      if (img.closest('.img-missing')) return;        // skip gradient fallbacks
+      var idx = gallery.length;
+      gallery.push(img);
+      img.classList.add('is-zoomable');
+      img.addEventListener('click', function () { open(idx); });
+    });
+    if (!gallery.length) return;
+    var cur = 0;
+    function show(i) {
+      cur = (i + gallery.length) % gallery.length;
+      var src = gallery[cur];
+      imgEl.src = src.currentSrc || src.src;
+      imgEl.alt = src.alt || '';
+      capEl.textContent = src.alt || '';
+    }
+    function open(i) { show(i); lb.hidden = false; document.body.style.overflow = 'hidden'; lb.classList.add('is-open'); }
+    function close() { lb.classList.remove('is-open'); document.body.style.overflow = ''; setTimeout(function () { lb.hidden = true; }, 250); }
+    document.getElementById('lbClose').addEventListener('click', close);
+    document.getElementById('lbPrev').addEventListener('click', function () { show(cur - 1); });
+    document.getElementById('lbNext').addEventListener('click', function () { show(cur + 1); });
+    lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+    document.addEventListener('keydown', function (e) {
+      if (lb.hidden) return;
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowLeft') show(cur - 1);
+      else if (e.key === 'ArrowRight') show(cur + 1);
+    });
   })();
 })();

@@ -24,6 +24,13 @@
 </head>
 <body>
 
+<!-- ============================ LOADER ============================ -->
+<div class="loader" id="loader" aria-hidden="true">
+  <span class="loader__lotus">
+    <svg viewBox="0 0 48 48" width="60" height="60"><use href="#lotus-mark"/></svg>
+  </span>
+</div>
+
 <!-- ============================ NAV ============================ -->
 <header class="nav" id="nav">
   <div class="nav__inner">
@@ -79,6 +86,13 @@
     <div class="hero__actions reveal" data-delay="3">
       <a href="#overview" class="btn btn--gold">See the plan</a>
       <a href="#closing" class="btn btn--ghost">So, who's in?</a>
+    </div>
+    <div class="countdown reveal" id="countdown" data-delay="4" aria-label="Time until the trip" hidden>
+      <div class="countdown__unit"><span class="countdown__num" data-cd="days">0</span><span class="countdown__lab">days</span></div>
+      <div class="countdown__unit"><span class="countdown__num" data-cd="hours">0</span><span class="countdown__lab">hrs</span></div>
+      <div class="countdown__unit"><span class="countdown__num" data-cd="mins">0</span><span class="countdown__lab">min</span></div>
+      <div class="countdown__unit"><span class="countdown__num" data-cd="secs">0</span><span class="countdown__lab">sec</span></div>
+      <p class="countdown__cap">until we land in the hill country</p>
     </div>
   </div>
   <a href="#overview" class="hero__scroll" aria-label="Scroll to overview">
@@ -207,6 +221,42 @@
         <!-- cards rendered from js/stays.js -->
         <p class="stay__fallback">Accommodation options load here. See <code>js/stays.js</code> for the full list.</p>
       </div>
+    </div>
+
+    <!-- cost-per-person calculator -->
+    <div class="calc reveal" id="calc" data-delay="2">
+      <div class="calc__intro">
+        <p class="eyebrow">Split it out</p>
+        <h3 class="calc__title">What's it cost each?</h3>
+        <p class="calc__hint">Pick a place and tweak the numbers &mdash; we'll do the maths against the &pound;500&ndash;900 group target.</p>
+      </div>
+      <div class="calc__controls">
+        <label class="calc__field">
+          <span>Where</span>
+          <select id="calcStay"></select>
+        </label>
+        <label class="calc__field calc__field--num">
+          <span>Nights</span>
+          <input type="number" id="calcNights" value="4" min="1" max="14" inputmode="numeric" />
+        </label>
+        <label class="calc__field calc__field--num">
+          <span>People</span>
+          <input type="number" id="calcPeople" value="6" min="1" max="20" inputmode="numeric" />
+        </label>
+      </div>
+      <div class="calc__out">
+        <div class="calc__figure">
+          <span class="calc__label">Per person</span>
+          <span class="calc__big" id="calcPP">&mdash;</span>
+        </div>
+        <div class="calc__figure">
+          <span class="calc__label">Group total</span>
+          <span class="calc__big calc__big--sub" id="calcTotal">&mdash;</span>
+        </div>
+        <div class="calc__status" id="calcStatus"></div>
+      </div>
+      <div class="calc__meter"><span class="calc__meterfill" id="calcMeter"></span></div>
+      <p class="calc__foot">Estimates only, based on current listings &mdash; the target band is &pound;500&ndash;900 for the group.</p>
     </div>
   </div>
 </section>
@@ -448,6 +498,38 @@
         <p>Warm days with afternoon showers, so outdoor plans go in the mornings &mdash; which suits the early starts anyway.</p>
       </div>
     </div>
+
+    <!-- live widgets: weather + currency -->
+    <div class="know__live">
+      <div class="livewidget reveal" data-delay="2">
+        <p class="livewidget__lab">Right now in Kandy</p>
+        <div class="liveweather">
+          <span class="liveweather__icon" id="wxIcon" aria-hidden="true">·</span>
+          <span class="liveweather__temp" id="wxTemp">&mdash;</span>
+          <span class="liveweather__desc" id="wxDesc">checking the sky&hellip;</span>
+        </div>
+        <p class="livewidget__sub">Typically ~29&deg;C in November &mdash; warm, with afternoon showers.</p>
+      </div>
+      <div class="livewidget reveal" data-delay="3">
+        <p class="livewidget__lab">Pounds &rarr; rupees</p>
+        <div class="fx">
+          <label class="fx__field"><span>£ GBP</span><input type="number" id="fxGbp" value="30" min="0" inputmode="decimal" /></label>
+          <span class="fx__eq" aria-hidden="true">=</span>
+          <label class="fx__field"><span>Rs LKR</span><input type="text" id="fxLkr" readonly value="&mdash;" /></label>
+        </div>
+        <p class="livewidget__sub" id="fxRate">live rate loading&hellip;</p>
+      </div>
+    </div>
+
+    <!-- packing checklist (saves to this browser) -->
+    <div class="packing reveal" data-delay="2">
+      <div class="packing__head">
+        <h3>Packing checklist</h3>
+        <button type="button" class="packing__reset" id="packReset">Reset</button>
+      </div>
+      <ul class="packing__list" id="packList"></ul>
+      <p class="packing__note">Tick things off &mdash; it saves in your browser.</p>
+    </div>
   </div>
 </section>
 
@@ -468,7 +550,18 @@
     </p>
     <div class="closing__actions reveal" data-delay="3">
       <a href="mailto:?subject=Kandy%20%26%20the%20Hill%20Country%20%E2%80%94%20I'm%20in&amp;body=Count%20me%20in%20for%202%E2%80%936%20November%202026." class="btn btn--gold btn--lg">I'm in &mdash; count me</a>
-      <a href="#overview" class="btn btn--ghost btn--lg">Run me through it again</a>
+      <button type="button" class="btn btn--ghost btn--lg" id="addCal">Add to calendar</button>
+    </div>
+    <div class="share reveal" data-delay="3" aria-label="Share this trip">
+      <span class="share__lab">Send it round</span>
+      <a class="share__btn" id="shareWhatsApp" href="#" target="_blank" rel="noopener" aria-label="Share on WhatsApp">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1 1 12 20zm4.5-5.9c-.2-.1-1.4-.7-1.7-.8s-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6.5 6.5 0 0 1-3.2-2.8c-.2-.4.2-.4.6-1.2.1-.2 0-.3 0-.5l-.7-1.7c-.2-.4-.4-.4-.5-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.6 4c2 .8 2 .5 2.4.5a2.6 2.6 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3z"/></svg>
+        WhatsApp
+      </a>
+      <button class="share__btn" id="shareCopy" type="button">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+        <span id="copyLabel">Copy link</span>
+      </button>
     </div>
     <p class="closing__dates reveal" data-delay="3">2&ndash;6 November 2026 · based in Kandy · out via Negombo</p>
   </div>
@@ -482,6 +575,17 @@
 </footer>
 
 </main>
+
+<!-- ============================ LIGHTBOX ============================ -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+  <button class="lightbox__close" id="lbClose" aria-label="Close">&times;</button>
+  <button class="lightbox__nav lightbox__nav--prev" id="lbPrev" aria-label="Previous photo">&#8249;</button>
+  <figure class="lightbox__stage">
+    <img class="lightbox__img" id="lbImg" src="" alt="" />
+    <figcaption class="lightbox__cap" id="lbCap"></figcaption>
+  </figure>
+  <button class="lightbox__nav lightbox__nav--next" id="lbNext" aria-label="Next photo">&#8250;</button>
+</div>
 
 <!-- Shared lotus motif (defined once, referenced everywhere) -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
