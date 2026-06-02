@@ -95,7 +95,7 @@ dl{margin:0}
 }
 .btn--gold{background:var(--saffron);color:var(--ink);box-shadow:0 14px 30px -12px rgba(232,163,61,.7)}
 .btn--gold:hover{background:var(--gold);transform:translateY(-3px);box-shadow:0 20px 40px -14px rgba(232,163,61,.85)}
-.btn--ghost{border-color:rgba(251,244,230,.55);color:var(--cream)}
+.btn--ghost{background:transparent;border-color:rgba(251,244,230,.55);color:var(--cream)}
 .btn--ghost:hover{border-color:var(--cream);background:rgba(251,244,230,.1);transform:translateY(-3px)}
 .btn--lg{padding:1.05rem 2rem;font-size:1.02rem}
 

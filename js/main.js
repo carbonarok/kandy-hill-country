@@ -205,6 +205,8 @@
     if (holder) holder.classList.add('img-missing');
   }
   Array.prototype.forEach.call(document.images, function (img) {
+    // The lightbox image is populated on demand — don't treat its empty src as missing.
+    if (img.closest('.lightbox')) return;
     // Empty src -> intentional fallback (e.g. the closing image isn't supplied)
     if (!img.getAttribute('src')) { markMissing(img); return; }
     // The 'error' event is the reliable signal for a genuine load failure.
