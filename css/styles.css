@@ -423,7 +423,7 @@ dl{margin:0}
   font-family:var(--serif);font-weight:600;line-height:1;
   font-size:clamp(2.6rem,1.6rem + 4vw,4.4rem);
   color:var(--saffron);letter-spacing:-.02em;
-  font-variant-numeric:tabular-nums;
+  font-variant-numeric:tabular-nums;white-space:nowrap;
 }
 .stat__label{margin-top:.6rem;font-size:.92rem;color:rgba(251,244,230,.82);max-width:18ch}
 
