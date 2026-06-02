@@ -509,7 +509,14 @@ dl{margin:0}
   font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--terracotta);
   background:rgba(199,91,57,.1);padding:.22rem .5rem;border-radius:6px;
 }
-.staycard__sub{font-size:.8rem;color:var(--body);opacity:.8;margin-bottom:.9rem}
+.staycard__sub{font-size:.8rem;color:var(--body);opacity:.8;margin-bottom:.7rem}
+.staycard__centre{
+  display:flex;align-items:center;flex-wrap:wrap;gap:.5rem .7rem;margin-bottom:.9rem;
+  padding:.5rem .7rem;background:rgba(26,92,74,.07);border-radius:9px;
+}
+.staycard__cl{font-size:.64rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--body);opacity:.65;flex:1 1 100%}
+.staycard__leg{display:inline-flex;align-items:center;gap:.32rem;font-size:.84rem;font-weight:600;color:var(--jade)}
+.legic{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;color:var(--terracotta)}
 .staycard__pros{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.1rem}
 .staycard__pros li{position:relative;padding-left:1.5rem;font-size:.88rem;line-height:1.4;color:var(--body)}
 .staycard__pros li::before{position:absolute;left:0;top:0;font-weight:700;font-size:.95rem;line-height:1.35}

@@ -12,6 +12,8 @@
      If TRIP is missing, the static bullet fallback already in the HTML
      simply stays. */
   var LOTUS = '<svg viewBox="0 0 48 48" width="15" height="15" aria-hidden="true"><use href="#lotus-mark"/></svg>';
+  var WALK_IC = '<svg class="legic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="13" cy="4" r="2"/><path d="M13 8l-2.5 4 2.5 2.5V21M10.5 12L7 14M13 11l3.5 1.5"/></svg>';
+  var CAR_IC = '<svg class="legic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 11l1.6-4.2A2 2 0 0 1 8.5 5.5h7a2 2 0 0 1 1.9 1.3L19 11M4 16h16v-4.2a1 1 0 0 0-.6-.9l-.8-.3a40 40 0 0 0-13.2 0l-.8.3a1 1 0 0 0-.6.9z"/><circle cx="7.5" cy="16.5" r="1.4"/><circle cx="16.5" cy="16.5" r="1.4"/></svg>';
   function chipHTML(c) {
     return '<span class="chip chip--' + c.type + '">' + c.label + '</span>';
   }
@@ -102,7 +104,12 @@
         (o.perPerson ? '<span class="staycard__pp">' + o.perPerson + '</span>' : '') + '</span>';
       html += '<span class="staycard__lean">' + o.lean + '</span>';
       html += '</div>';
-      html += '<p class="staycard__sub">' + o.capacity + ' · ' + o.drive + '</p>';
+      html += '<p class="staycard__sub">' + o.capacity + '</p>';
+      if (o.centre) {
+        html += '<p class="staycard__centre"><span class="staycard__cl">To the centre</span>' +
+          '<span class="staycard__leg">' + WALK_IC + o.centre.walk + '</span>' +
+          '<span class="staycard__leg">' + CAR_IC + o.centre.drive + '</span></p>';
+      }
       html += '<ul class="staycard__pros">';
       o.pros.forEach(function (p) { html += '<li class="is-pro">' + p + '</li>'; });
       o.cons.forEach(function (c) { html += '<li class="is-con">' + c + '</li>'; });
